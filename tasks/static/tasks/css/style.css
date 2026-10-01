@@ -1,0 +1,345 @@
+
+/* =====================================================
+   GLOBAL
+===================================================== */
+
+:root {
+    --primary: #6366f1;
+    --primary-dark: #4f46e5;
+    --dark: #111827;
+    --text: #374151;
+    --muted: #6b7280;
+    --background: #f8fafc;
+    --white: #ffffff;
+    --border: #e5e7eb;
+    --success: #10b981;
+    --warning: #f59e0b;
+    --danger: #ef4444;
+}
+
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+body {
+    font-family: "Inter", sans-serif;
+    background: var(--background);
+    color: var(--text);
+    min-height: 100vh;
+}
+
+
+/* =====================================================
+   NAVBAR
+===================================================== */
+
+.navbar {
+    background: linear-gradient(
+        135deg,
+        #111827,
+        #1f2937
+    );
+
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+
+    min-height: 70px;
+}
+
+
+.navbar-brand {
+    font-size: 1.35rem;
+    letter-spacing: -0.5px;
+}
+
+
+.navbar-brand i {
+    color: #818cf8;
+}
+
+
+.nav-link {
+    color: #d1d5db !important;
+    margin: 0 5px;
+    transition: 0.2s;
+}
+
+
+.nav-link:hover {
+    color: #ffffff !important;
+}
+
+
+.user-menu {
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+
+.user-menu:hover {
+    color: white;
+    background: rgba(255, 255, 255, 0.08);
+}
+
+
+/* =====================================================
+   MAIN CONTENT
+===================================================== */
+
+.main-content {
+    min-height: calc(100vh - 140px);
+    padding-top: 110px;
+    padding-bottom: 50px;
+}
+
+
+/* =====================================================
+   CARDS
+===================================================== */
+
+.card {
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    background: var(--white);
+    box-shadow: 0 5px 20px rgba(15, 23, 42, 0.04);
+}
+
+
+.stat-card {
+    transition: 0.25s ease;
+}
+
+
+.stat-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 30px rgba(15, 23, 42, 0.08);
+}
+
+
+.stat-icon {
+    width: 50px;
+    height: 50px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 12px;
+
+    font-size: 1.3rem;
+}
+
+
+/* =====================================================
+   BUTTONS
+===================================================== */
+
+.btn-primary {
+    background: var(--primary);
+    border-color: var(--primary);
+}
+
+
+.btn-primary:hover {
+    background: var(--primary-dark);
+    border-color: var(--primary-dark);
+}
+
+
+.btn {
+    border-radius: 9px;
+    font-weight: 600;
+}
+
+
+/* =====================================================
+   FORMS
+===================================================== */
+
+.form-control,
+.form-select {
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 11px 14px;
+}
+
+
+.form-control:focus,
+.form-select:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.12);
+}
+
+
+/* =====================================================
+   TASK CARD
+===================================================== */
+
+.task-card {
+    transition: 0.2s ease;
+}
+
+
+.task-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(15, 23, 42, 0.07);
+}
+
+
+.task-title {
+    font-weight: 700;
+    color: var(--dark);
+}
+
+
+.completed-task {
+    opacity: 0.65;
+}
+
+
+.completed-task .task-title {
+    text-decoration: line-through;
+}
+
+
+/* =====================================================
+   PRIORITY
+===================================================== */
+
+.priority-high {
+    color: var(--danger);
+}
+
+
+.priority-medium {
+    color: var(--warning);
+}
+
+
+.priority-low {
+    color: var(--success);
+}
+
+
+/* =====================================================
+   BADGES
+===================================================== */
+
+.badge {
+    border-radius: 7px;
+    padding: 6px 9px;
+    font-weight: 600;
+}
+
+
+/* =====================================================
+   FOOTER
+===================================================== */
+
+.footer {
+    background: var(--dark);
+    color: #9ca3af;
+    padding: 22px 0;
+    font-size: 0.9rem;
+}
+
+
+.footer i {
+    color: #818cf8;
+}
+
+
+/* =====================================================
+   ALERTS
+===================================================== */
+
+.alert {
+    border: none;
+    border-radius: 12px;
+}
+
+
+/* =====================================================
+   AUTHENTICATION
+===================================================== */
+
+.auth-wrapper {
+    min-height: 70vh;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.auth-card {
+    width: 100%;
+    max-width: 450px;
+}
+
+
+.auth-logo {
+    width: 65px;
+    height: 65px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    margin: 0 auto 20px;
+
+    border-radius: 18px;
+
+    background: rgba(99, 102, 241, 0.1);
+
+    color: var(--primary);
+
+    font-size: 1.8rem;
+}
+
+
+/* =====================================================
+   EMPTY STATE
+===================================================== */
+
+.empty-state {
+    text-align: center;
+    padding: 60px 20px;
+}
+
+
+.empty-state i {
+    font-size: 4rem;
+    color: #c7d2fe;
+}
+
+
+.empty-state h4 {
+    margin-top: 20px;
+    color: var(--dark);
+}
+
+
+.empty-state p {
+    color: var(--muted);
+}
+
+
+/* =====================================================
+   RESPONSIVE
+===================================================== */
+
+@media (max-width: 768px) {
+
+    .main-content {
+        padding-top: 95px;
+    }
+
+    .stat-card {
+        margin-bottom: 15px;
+    }
+
+}

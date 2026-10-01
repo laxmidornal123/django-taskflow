@@ -1,0 +1,514 @@
+{% extends "tasks/base.html" %}
+
+{% block title %}Dashboard | TaskFlow{% endblock %}
+
+{% block content %}
+
+<!-- ================= HEADER ================= -->
+
+<div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center mb-4">
+
+    <div>
+
+        <p class="text-muted mb-1">
+            Welcome back 👋
+        </p>
+
+        <h1 class="fw-bold mb-1">
+            {{ user.username }}'s Dashboard
+        </h1>
+
+        <p class="text-muted mb-0">
+            Stay organized and get things done.
+        </p>
+
+    </div>
+
+
+    <div class="mt-3 mt-md-0">
+
+        <a
+            href="{% url 'create_task' %}"
+            class="btn btn-primary px-4"
+        >
+
+            <i class="bi bi-plus-lg me-1"></i>
+
+            Add New Task
+
+        </a>
+
+    </div>
+
+</div>
+
+
+<!-- ================= STATISTICS ================= -->
+
+<div class="row g-4 mb-4">
+
+    <!-- Total -->
+
+    <div class="col-12 col-md-6 col-xl-3">
+
+        <div class="card stat-card h-100">
+
+            <div class="card-body">
+
+                <div class="d-flex justify-content-between align-items-center">
+
+                    <div>
+
+                        <p class="text-muted mb-1">
+                            Total Tasks
+                        </p>
+
+                        <h2 class="fw-bold mb-0">
+                            {{ total_tasks }}
+                        </h2>
+
+                    </div>
+
+                    <div class="stat-icon bg-primary bg-opacity-10 text-primary">
+
+                        <i class="bi bi-list-check"></i>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- Pending -->
+
+    <div class="col-12 col-md-6 col-xl-3">
+
+        <div class="card stat-card h-100">
+
+            <div class="card-body">
+
+                <div class="d-flex justify-content-between align-items-center">
+
+                    <div>
+
+                        <p class="text-muted mb-1">
+                            Pending
+                        </p>
+
+                        <h2 class="fw-bold mb-0">
+                            {{ pending_tasks }}
+                        </h2>
+
+                    </div>
+
+                    <div class="stat-icon bg-warning bg-opacity-10 text-warning">
+
+                        <i class="bi bi-hourglass-split"></i>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- Completed -->
+
+    <div class="col-12 col-md-6 col-xl-3">
+
+        <div class="card stat-card h-100">
+
+            <div class="card-body">
+
+                <div class="d-flex justify-content-between align-items-center">
+
+                    <div>
+
+                        <p class="text-muted mb-1">
+                            Completed
+                        </p>
+
+                        <h2 class="fw-bold mb-0">
+                            {{ completed_tasks }}
+                        </h2>
+
+                    </div>
+
+                    <div class="stat-icon bg-success bg-opacity-10 text-success">
+
+                        <i class="bi bi-check-circle"></i>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- High Priority -->
+
+    <div class="col-12 col-md-6 col-xl-3">
+
+        <div class="card stat-card h-100">
+
+            <div class="card-body">
+
+                <div class="d-flex justify-content-between align-items-center">
+
+                    <div>
+
+                        <p class="text-muted mb-1">
+                            High Priority
+                        </p>
+
+                        <h2 class="fw-bold mb-0">
+                            {{ high_priority_tasks }}
+                        </h2>
+
+                    </div>
+
+                    <div class="stat-icon bg-danger bg-opacity-10 text-danger">
+
+                        <i class="bi bi-exclamation-triangle"></i>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- ================= TASK SECTION ================= -->
+
+<div class="card">
+
+    <div class="card-body p-4">
+
+
+        <!-- Section Header -->
+
+        <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center mb-4">
+
+            <div>
+
+                <h4 class="fw-bold mb-1">
+                    My Tasks
+                </h4>
+
+                <p class="text-muted mb-0">
+                    Manage your daily tasks and stay productive.
+                </p>
+
+            </div>
+
+
+            <div class="mt-3 mt-md-0">
+
+                <span class="badge bg-light text-dark border">
+
+                    {{ total_tasks }} task{{ total_tasks|pluralize }}
+
+                </span>
+
+            </div>
+
+        </div>
+
+
+        {% if tasks %}
+
+
+            <!-- ================= TASK LIST ================= -->
+
+            <div class="row g-3">
+
+                {% for task in tasks %}
+
+                    <div class="col-12">
+
+                        <div
+                            class="card task-card
+                            {% if task.status == 'COMPLETED' %}
+                                completed-task
+                            {% endif %}"
+                        >
+
+                            <div class="card-body">
+
+                                <div class="row align-items-center">
+
+
+                                    <!-- Task Information -->
+
+                                    <div class="col-lg-7">
+
+                                        <div class="d-flex align-items-start">
+
+
+                                            <!-- Status Icon -->
+
+                                            <div class="me-3 pt-1">
+
+                                                {% if task.status == "COMPLETED" %}
+
+                                                    <i
+                                                        class="bi bi-check-circle-fill text-success fs-4"
+                                                    ></i>
+
+                                                {% else %}
+
+                                                    <i
+                                                        class="bi bi-circle text-muted fs-4"
+                                                    ></i>
+
+                                                {% endif %}
+
+                                            </div>
+
+
+                                            <div>
+
+                                                <h5 class="task-title mb-1">
+
+                                                    {{ task.title }}
+
+                                                </h5>
+
+
+                                                {% if task.description %}
+
+                                                    <p class="text-muted mb-2">
+
+                                                        {{ task.description|truncatechars:120 }}
+
+                                                    </p>
+
+                                                {% endif %}
+
+
+                                                <div class="d-flex flex-wrap gap-2">
+
+
+                                                    <!-- Priority -->
+
+                                                    {% if task.priority == "HIGH" %}
+
+                                                        <span class="badge bg-danger bg-opacity-10 text-danger">
+
+                                                            <i class="bi bi-arrow-up-circle me-1"></i>
+
+                                                            High
+
+                                                        </span>
+
+                                                    {% elif task.priority == "MEDIUM" %}
+
+                                                        <span class="badge bg-warning bg-opacity-10 text-warning">
+
+                                                            <i class="bi bi-dash-circle me-1"></i>
+
+                                                            Medium
+
+                                                        </span>
+
+                                                    {% else %}
+
+                                                        <span class="badge bg-success bg-opacity-10 text-success">
+
+                                                            <i class="bi bi-arrow-down-circle me-1"></i>
+
+                                                            Low
+
+                                                        </span>
+
+                                                    {% endif %}
+
+
+                                                    <!-- Status -->
+
+                                                    {% if task.status == "COMPLETED" %}
+
+                                                        <span class="badge bg-success">
+
+                                                            <i class="bi bi-check2 me-1"></i>
+
+                                                            Completed
+
+                                                        </span>
+
+                                                    {% else %}
+
+                                                        <span class="badge bg-secondary">
+
+                                                            <i class="bi bi-clock me-1"></i>
+
+                                                            Pending
+
+                                                        </span>
+
+                                                    {% endif %}
+
+
+                                                    <!-- Due Date -->
+
+                                                    {% if task.due_date %}
+
+                                                        <span class="badge bg-light text-dark border">
+
+                                                            <i class="bi bi-calendar3 me-1"></i>
+
+                                                            {{ task.due_date|date:"M d, Y" }}
+
+                                                        </span>
+
+                                                    {% endif %}
+
+
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+
+
+                                    <!-- Task Actions -->
+
+                                    <div class="col-lg-5 mt-3 mt-lg-0">
+
+                                        <div class="d-flex justify-content-lg-end gap-2">
+
+
+                                            <!-- Complete / Pending -->
+
+                                            <a
+                                                href="{% url 'toggle_task' task.id %}"
+                                                class="btn btn-sm
+                                                {% if task.status == 'COMPLETED' %}
+                                                    btn-outline-warning
+                                                {% else %}
+                                                    btn-outline-success
+                                                {% endif %}"
+                                            >
+
+                                                {% if task.status == "COMPLETED" %}
+
+                                                    <i class="bi bi-arrow-counterclockwise"></i>
+
+                                                    Undo
+
+                                                {% else %}
+
+                                                    <i class="bi bi-check-lg"></i>
+
+                                                    Complete
+
+                                                {% endif %}
+
+                                            </a>
+
+
+                                            <!-- Edit -->
+
+                                            <a
+                                                href="{% url 'edit_task' task.id %}"
+                                                class="btn btn-sm btn-outline-primary"
+                                            >
+
+                                                <i class="bi bi-pencil"></i>
+
+                                                Edit
+
+                                            </a>
+
+
+                                            <!-- Delete -->
+
+                                            <a
+                                                href="{% url 'delete_task' task.id %}"
+                                                class="btn btn-sm btn-outline-danger"
+                                            >
+
+                                                <i class="bi bi-trash"></i>
+
+                                                Delete
+
+                                            </a>
+
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                {% endfor %}
+
+            </div>
+
+
+        {% else %}
+
+
+            <!-- ================= EMPTY STATE ================= -->
+
+            <div class="empty-state">
+
+                <i class="bi bi-clipboard-check"></i>
+
+                <h4>
+                    No tasks yet
+                </h4>
+
+                <p>
+                    You haven't created any tasks.
+                    Start by adding your first task.
+                </p>
+
+                <a
+                    href="{% url 'create_task' %}"
+                    class="btn btn-primary mt-2"
+                >
+
+                    <i class="bi bi-plus-lg me-1"></i>
+
+                    Create Your First Task
+
+                </a>
+
+            </div>
+
+
+        {% endif %}
+
+    </div>
+
+</div>
+
+{% endblock %}
